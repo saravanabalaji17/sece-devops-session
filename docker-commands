@@ -1,0 +1,109 @@
+Verify Docker Version
+=========================
+# docker version
+
+View System Wide Information
+=========================
+# docker info
+
+Search the Images
+=========================
+
+# docker search <Image name> 
+# docker search ubuntu
+
+Download Docker Container Images
+=========================
+
+# docker pull <Image name>
+# docker pull ubuntu:20.04
+# docker pull ubuntu:22.04
+
+
+# docker pull centos:8
+# docker pull nginx  
+
+
+
+View Downloaded Docker Container Images
+========================================
+
+
+# docker image ls 
+		(or )
+# docker images
+
+
+
+# docker run -it --name=mynginx nginx
+
+Type exit to stop / shutdown the container and if want to get out from the container without stopping it then type “ctrl+p+q”
+
+ 
+
+
+
+Run Container in detach mode
+============================
+
+#docker run -it -d --name=httpd-container httpd
+
+View All Running Containers
+============================
+
+# docker ps
+
+View all running along with exited or stopped containers
+========================================================
+
+#docker ps -a
+
+View latest container
+=======================
+#docker ps -l
+
+
+
+Container Console Access
+=========================
+# docker exec -it <container name or id> /bin/bash
+
+# docker exec -it httpd-container /bin/bash
+
+
+
+Start, Stop, Restart and Kill Containers
+==================================================
+
+# docker stop <container name or id>
+# docker stop httpd-container
+
+# docker start <container name or id>
+
+# docker restart <container name or id>
+ 
+# docker kill <container name or id>
+
+
+
+Remove a Container
+=========================
+# docker stop nginx-container
+# docker rm nginx-container
+
+To remove a running container forcefully then use ‘-f’ option in docker rm command
+
+# docker rm -f nginx-container
+
+
+Remove Docker Container Images
+==============================
+
+# docker rmi ubuntu:20.04
+# docker rmi 54c9d81cbb44
+
+
+
+
+
+

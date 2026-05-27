@@ -36,7 +36,7 @@ vi Dockerfile
 Paste:
 
 ```dockerfile
-FROM ubuntu:22.04
+FROM ubuntu
 
 ENV DEBIAN_FRONTEND=noninteractive
 

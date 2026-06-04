@@ -1,0 +1,116 @@
+Install MetalLB
+======================
+
+
+# kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.14.8/config/manifests/metallb-native.yaml
+
+latest
+# kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.15.3/config/manifests/metallb-native.yaml
+
+# kubectl get po -n metallb-system -o wide
+
+
+Create IP Pool
+===================
+Choose an unused IP range from your network.
+
+
+# vi ippool.yaml
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: first-pool
+  namespace: metallb-system
+spec:
+  addresses:
+  - 192.168.44.240-192.168.44.250  >>>>>>>>IP range need to change
+
+#kubectl create -f ippool.yaml
+
+
+
+
+
+Create L2 Advertisement
+============================
+
+#vi l2ad.yaml
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: example
+  namespace: metallb-system
+
+
+# kubectl create -f l2ad.yaml
+
+
+Verify
+=========
+# kubectl get ipaddresspool -n metallb-system
+# kubectl get l2advertisement -n metallb-system
+
+
+
+Deploy Nginx
+=================
+
+
+#vi nginx-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+		
+		
+		
+		
+#kubectl apply -f nginx-deployment.yaml
+
+
+Create LoadBalancer Service
+==============================
+
+#vi nginx-deploy-svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-deploy-svc
+spec:
+  type: LoadBalancer
+  selector:
+    app: nginx
+  ports:
+  - port: 80
+    targetPort: 80
+
+#kubectl apply -f nginx-service.yaml
+
+#kubectl get svc
+
+
+
+
+
+
+
+
+=================================================
+
+# kubectl delete -f ippool.yaml
+# kubectl delete -f l2ad.yaml

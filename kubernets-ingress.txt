@@ -52,11 +52,11 @@ Create Deployments
 
 Create services
 ==================
-# kubectl expose deployment nginx-deploy --name nginx-deploy-svc --type=NodePort --port 80 --target-port 80
+# kubectl expose deployment nginx-deploy --name nginx-deploy-svc --type=ClusterIP --port 80 --target-port 80
 
-# kubectl expose deployment httpd-deploy --name httpd-deploy-svc --type=NodePort --port 80	--target-port 80
+# kubectl expose deployment httpd-deploy --name httpd-deploy-svc --type=ClusterIP --port 80	--target-port 80
 
-# kubectl expose deployment phpmyadmin-deploy --name phpmyadmin-deploy-svc --type NodePort --port 8080 --target-port 80
+# kubectl expose deployment phpmyadmin-deploy --name phpmyadmin-deploy-svc --type=ClusterIP --port 80 --target-port 80
 
 
 
@@ -65,7 +65,7 @@ Create services
 
 # kubectl expose deployment httpd-deploy --name httpd-deploy-svc --type=LoadBalancer --port 80 --target-port 80
 
-# kubectl expose deployment phpmyadmin-deploy --name phpmyadmin-deploy-svc --type LoadBalancer --port 8080 --target-port 80
+# kubectl expose deployment phpmyadmin-deploy --name phpmyadmin-deploy-svc --type LoadBalancer --port 80 --target-port 80
 
 
 

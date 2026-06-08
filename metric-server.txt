@@ -1,0 +1,30 @@
+What is a Kubernetes Metrics Server ?
+The Kubernetes Metrics Server is a resource metrics monitoring tool for Kubernetes. The Kubernetes Metrics Server measures CPU and memory usage across the Kubernetes cluster. 
+This metrics-server collects metrics and then shows resource usage statistics for your cluster so that you can monitor resource usage for each node and also for each pod.
+
+
+install metric server
+==========================
+# kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml	
+
+
+
+command:
+- /metrics-server
+- --kubelet-insecure-tls
+- --kubelet-preferred-address-types=InternalIP
+
+
+
+# kubectl -n kube-system edit deployments.apps metrics-server
+
+    spec:
+      containers:
+      - args:
+        - /metrics-server
+        - --kubelet-insecure-tls
+        - --kubelet-preferred-address-types=InternalIP
+
+
+#kubectl top pods
+#kubectl top nodes

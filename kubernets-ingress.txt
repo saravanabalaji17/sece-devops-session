@@ -33,12 +33,121 @@ latest
 ===========
 kubectl apply -f https://github.com/kubernetes/ingress-nginx/blob/controller-v1.9.6/deploy/static/provider/baremetal/deploy.yaml
 
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.13.4/deploy/static/provider/baremetal/deploy.yaml
+#kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.13.4/deploy/static/provider/baremetal/deploy.yaml
 
+# kubectl -n ingress-nginx get all
 
 # kubectl -n ingress-nginx edit svc ingress-nginx-controller
   type: LoadBalancer
 
+==================================================================================================================
+
+#vi httpd-deploy.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: httpd-deploy
+  labels:
+    app: httpd
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: httpd
+  template:
+    metadata:
+      labels:
+        app: httpd
+    spec:
+      containers:
+      - name: httpd
+        image: httpd
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: httpd-deploy-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: httpd
+  ports:
+  - port: 80
+    targetPort: 80
+
+==================================================================================================================
+#vi nginx-deploy.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deploy
+  labels:
+    app: nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-deploy-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: nginx
+  ports:
+  - port: 80
+    targetPort: 80
+==================================================================================================================
+
+# vi phpmyadmin-deploy.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phpmyadmin-deploy
+  labels:
+    app: phpmyadmin
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: phpmyadmin
+  template:
+    metadata:
+      labels:
+        app: phpmyadmin
+    spec:
+      containers:
+      - name: phpmyadmin
+        image: phpmyadmin
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: phpmyadmin-deploy-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: phpmyadmin
+  ports:
+  - port: 80
+    targetPort: 80
 
 
 Create Deployments

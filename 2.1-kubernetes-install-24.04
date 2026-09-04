@@ -1,4 +1,36 @@
 
+#ssh <username>@<IPaddress>
+
+#systemctl status ssh
+
+#vi /etc/netplan/50-cloud-init.yaml
+network:
+    ethernets:
+        ens33:
+            addresses:
+            - 192.168.44.100/24
+            nameservers:
+                addresses: [8.8.8.8,8.8.4.4]
+                search: []
+            routes:
+            -   to: default
+                via: 192.168.44.2
+    version: 2
+
+
+#netplan apply
+
+#ping google.com
+
+# route -n
+#apt update
+
+
+=======================================================================================================================================
+
+
+
+
 
  timedatectl set-timezone Asia/Kolkata
 

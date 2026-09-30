@@ -780,6 +780,7 @@ docker inspect nginx-container
 
 #  docker container commands to host website
 
+## using httpd image
 ```bash id="m2n1q8"
 docker run -d -p 9090:80 --name apache-container httpd
 docker ps
@@ -788,6 +789,7 @@ apt update
 apt install wget zip
 wget https://templatemo.com/download/templatemo_629_nexus_system -O web.zip
 unzip web.zip 
+ls -l
 cd templatemo_629_nexus_system/
 cp -r * /usr/local/apache2/htdocs/
 cd /usr/local/apache2/htdocs/
@@ -798,3 +800,22 @@ go to browser and access the web page
 using host port 9090
 ```
 
+## using nginx image
+```bash id="m2n1q8"
+docker run -d -p 8877:80 --name nginx-container nginx
+docker ps
+docker exec -it nginx-container bash
+apt update
+apt install wget zip
+wget https://templatemo.com/download/templatemo_629_nexus_system -O web.zip
+unzip web.zip 
+ls -l
+cd templatemo_629_nexus_system/
+cp -r * /usr/share/nginx/html/
+cd /usr/share/nginx/html/
+pwd
+ls -l
+
+go to browser and access the web page
+using host port 8877
+```

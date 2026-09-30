@@ -774,3 +774,27 @@ docker stats
 ```bash id="k5v3r9"
 docker inspect nginx-container
 ```
+
+
+
+
+#  docker container commands to host website
+
+```bash id="m2n1q8"
+docker run -d -p 9090:80 --name apache-container httpd
+docker ps
+docker exec -it apache-container bash
+apt update
+apt install wget zip
+wget https://templatemo.com/download/templatemo_629_nexus_system -O web.zip
+unzip web.zip 
+cd templatemo_629_nexus_system/
+cp -r * /usr/local/apache2/htdocs/
+cd /usr/local/apache2/htdocs/
+pwd
+ls -l
+
+go to browser and access the web page
+using host port 9090
+```
+
